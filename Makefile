@@ -7,7 +7,7 @@ VERSION := 16
 .PHONY: build release release_latest
 
 build:
-	docker image build -t $(NAME):$(VERSION) .
+	docker image build -t $(NAME):$(VERSION) -t $(NAME):latest .
 
 release: build
 	docker image push $(NAME):$(VERSION)
