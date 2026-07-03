@@ -13,5 +13,4 @@ release: build
 	docker image push $(NAME):$(VERSION)
 
 release_latest: release
-	docker image tag $(NAME):$(VERSION) $(NAME):latest
 	docker image push $(NAME):latest

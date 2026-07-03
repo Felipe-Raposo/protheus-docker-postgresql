@@ -1,4 +1,4 @@
-# License Server
+# Protheus Docker PostgreSQL 16
 
 Imagem Docker para execução do **PostgreSQL para Protheus**, em ambiente containerizado.
 
@@ -8,9 +8,9 @@ Este projeto monta uma imagem Docker PostgreSQL, preparado para o Protheus. A im
 
 ### Características
 
-- **Base:** postgres
+- **Base:** postgres:16
 - **PostgreSQL:** porta TCP 5432
-- **Configuração dinâmica:** Banco de dados, usuário e senha definidos via variáveis de ambiente `DATABASE_NAME`, `DATABASE_USER` e `DATABASE_PASS`
+- **Configuração dinâmica:** Banco de dados, usuário e senha definidos via variáveis de ambiente `PROTHEUS_DB`, `PROTHEUS_USER` e `PROTHEUS_PASSWORD`
 
 ## Pré-requisitos
 
@@ -40,7 +40,8 @@ Gera as tags:
 
 ## Estrutura interna (referência)
 
-- **Entrypoint:** `/docker-entrypoint-initdb.d/postgres_protheus.sh`
+- **Entrypoint:** `/usr/local/bin/protheus-entrypoint.sh` (wrapper que reconcilia o banco e delega ao entrypoint oficial)
+- **Reconciliação:** `/usr/local/bin/protheus-reconcile.sh` — cria o usuário/banco do Protheus (na primeira inicialização, via `/docker-entrypoint-initdb.d`) e **sincroniza a senha a cada start** de forma idempotente, mesmo em volumes já inicializados
 - **Configuração:** `/etc/postgresql.conf`
 
 ## Licença
