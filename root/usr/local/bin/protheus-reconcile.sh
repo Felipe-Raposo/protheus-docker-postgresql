@@ -14,9 +14,14 @@ DATABASE_NAME=${PROTHEUS_DB:-"protheus"}
 DATABASE_USER=${PROTHEUS_USER:-"protheus"}
 DATABASE_PASS=${PROTHEUS_PASSWORD:-"protheus"}
 
+POSTGRES_USER=${POSTGRES_USER:-"postgres"}
+POSTGRES_DB=${POSTGRES_DB:-"$POSTGRES_USER"}
+
 # Com "--wait", aguarda o servidor aceitar conexoes (uso no start normal, em background).
+# A checagem e feita via TCP porque o servidor temporario do initdb escuta apenas no
+# socket local; assim nao concorre com o script de /docker-entrypoint-initdb.d.
 if [[ "${1:-}" == "--wait" ]]; then
-	until pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q; do
+	until pg_isready -h 127.0.0.1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q; do
 		sleep 1
 	done
 fi

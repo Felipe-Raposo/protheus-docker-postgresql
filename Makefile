@@ -2,7 +2,7 @@ export DOCKER_BUILDKIT := 1
 
 IMAGE_REPO := feliperaposo
 NAME := $(IMAGE_REPO)/protheus-postgresql
-VERSION := 16
+VERSION := 18
 
 .PHONY: build release release_latest
 

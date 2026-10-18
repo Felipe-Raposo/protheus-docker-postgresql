@@ -1,4 +1,4 @@
-FROM postgres:16
+FROM postgres:18
 LABEL maintainer="Felipe Raposo <feliperaposo@gmail.com>"
 EXPOSE 5432/tcp
 ENV LANG=pt_BR.CP1252
