@@ -4,13 +4,17 @@ Imagem Docker para execução do **PostgreSQL para Protheus**, em ambiente conta
 
 ## Descrição
 
-Este projeto monta uma imagem Docker PostgreSQL, preparado para o Protheus. A imagem é útil para ambientes de desenvolvimento, testes ou orquestração (Kubernetes, Docker Compose, etc.).
+Este projeto monta uma imagem Docker PostgreSQL 18 preparada para o Protheus. Serve para desenvolvimento, testes ou orquestração (Kubernetes, Docker Compose, etc.).
+
+Se estiver buscando um ambiente completo com Protheus + License + dbAccess + Postgres, acesse esse [projeto](https://github.com/Felipe-Raposo/protheus-docker-compose).
 
 ### Características
 
-- **Base:** postgres:18
+- **Base:** `postgres:18`
 - **PostgreSQL:** porta TCP 5432
-- **Configuração dinâmica:** Banco de dados, usuário e senha definidos via variáveis de ambiente `PROTHEUS_DB`, `PROTHEUS_USER` e `PROTHEUS_PASSWORD`
+- **Locale:** `pt_BR.CP1252`
+- **Configuração dinâmica:** banco, usuário e senha definidos via `PROTHEUS_DB`, `PROTHEUS_USER` e `PROTHEUS_PASSWORD` (padrão `protheus`/`protheus`/`protheus`)
+- **UID do host:** com `HOST_UID` e `HOST_GID`, o entrypoint usa `gosu` para o PostgreSQL gravar no bind mount com o usuário do host
 
 ## Pré-requisitos
 
